@@ -14,29 +14,19 @@ A web application built with React, Redux, Express, and MongoDB for managing ima
 -Backend: Node.js, Express.js, MongoDB, Mongoose
 -Styling: CSS, Bootstrap
 -Other Tools: Redux Toolkit, FormData for image uploads
-## Model Building 
 
-### Abstractive Approach 
+## Setup Instructions 
+Navigate to the project directory: cd gallery-app
+Install dependencies: npm install
+Start the frontend: npm start
+Start the backend (if separate): node server.js
 
-- Selected t5-small model for abstractive summarization.
-- Prefine tuning results stored at `Summarization_Model/model.ipynb` .
-- Fine tuned it on my dataset , evaluated results at `abstractive_mdel_t5_model_ipynb.ipynb)
 
+### API Endpoints
+GET /api/v1/get/images: Fetch all images.
+GET /api/v1/get/categories: Fetch all categories.
+POST /api/v1/add/image: Upload a new image.
+POST /api/v1/add/category: Add a new category.
+GET /api/v1/get/singleimage?category=<category_id>: Fetch images by category.
 
-### Extractive Approach
-- Performed Extractive Summarization pre-processing on the dataset by removing stopwords, punctuation, and special characters and white spaces.
-- Selected Text Rank Algorithm for extractive summarization .
-- Implemented through py summa library.
-
-- Rouge scores for extractive summarization are as follows: (for 20% ratio of input text vs summary length)
-   ` Rouge-1: 0.25 `
-   ` Rouge-2: 0.12 `
-   ` Rouge-L: 0.19 `
-
-- Optimized ratio Length of summary to input text to get better results.
-
-## Model Interface 
-
-- Built Model Interface using streamlit library.
-- Implemented in `Model_Interface/app.py`.
-- Visualized Abstract and Extractive Summarization results on the interface.
+Overall, the app integrates frontend and backend technologies to create a responsive and dynamic gallery management system.
