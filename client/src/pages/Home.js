@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllCategories } from "../redux/reducers/gallerySlice";
-import { getAllImages } from "../redux/reducers/gallerySlice";
-import { getSingleImage } from "../redux/reducers/gallerySlice";
-import { postNewCategory } from "../redux/reducers/gallerySlice";
+import {
+  getAllCategories,
+  getAllImages,
+  getSingleImage,
+} from "../redux/reducers/gallerySlice";
 const Home = () => {
   const dispatch = useDispatch();
 
@@ -16,8 +17,7 @@ const Home = () => {
 
   const handleCategories = (id) => {
     dispatch(getSingleImage(id));
-    dispatch(getAllImages());
-   };
+  };
 
   return (
     <div class="container my-3">

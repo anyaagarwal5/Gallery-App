@@ -5,6 +5,8 @@ import {
   getAllCategories,
 } from "../redux/reducers/gallerySlice";
 import { useNavigate } from "react-router-dom";
+
+
 const AddCategory = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
