@@ -48,7 +48,7 @@ export const postNewImage = createAsyncThunk(
   "images/postNewImage",
   async (formData) => {
     const res = await axios.post(
-      "http://localhost:8000/api/v1/add/image",
+      "http://localhost:8000/api/v1/upload/image",
       formData,
       {
         headers: {
@@ -75,10 +75,11 @@ const gallerySlice = createSlice({
       state.singleImage = action.payload;
     });
     builder.addCase(postNewImage.fulfilled, (state, action) => {
-      state.NewImage = action.payload;
+      state.images.push(action.payload); // Append the new image to the state
     });
   },
 });
 
 export default gallerySlice.reducer;
+
 

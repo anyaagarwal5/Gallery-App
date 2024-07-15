@@ -1,0 +1,28 @@
+.category-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .category-buttons .btn {
+    flex: 0 0 auto;
+    margin: 0 5px;
+  }
+  
+  .category-buttons .btn-primary {
+    background-color: blue;
+    color: white;
+  }
+  
+  .category-buttons .btn-default {
+    background-color: grey;
+    color: white;
+  }
+  
+  .category-buttons .btn-default:hover {
+    background-color: lightgrey;
+  }
+  
+  
+  

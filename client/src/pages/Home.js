@@ -1,65 +1,79 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getAllCategories,
   getAllImages,
   getSingleImage,
 } from "../redux/reducers/gallerySlice";
+import './home.css';
+
 const Home = () => {
   const dispatch = useDispatch();
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
 
   useEffect(() => {
     dispatch(getAllImages());
     dispatch(getAllCategories());
-  }, []);
+  }, [dispatch]);
 
   const { images, categories } = useSelector((state) => state.gallery);
 
   const handleCategories = (id) => {
+    setSelectedCategoryId(id);
     dispatch(getSingleImage(id));
   };
 
+  const resetCategory = () => {
+    setSelectedCategoryId(null);
+    dispatch(getAllImages());
+  };
+
+  const filteredImages = selectedCategoryId
+    ? images.filter((image) => image.category === selectedCategoryId)
+    : images;
+
   return (
-    <div class="container my-3">
-      <div class="row ">
-        <div align="center">
+    <div className="container my-3">
+      <div className="row">
+        <div className="category-buttons" align="center">
           <button
-            onClick={() => dispatch(getAllImages())}
-            class="btn btn-primary filter-button"
+            onClick={resetCategory}
+            className={`btn filter-button ${!selectedCategoryId ? "btn-primary" : "btn-default"}`}
             data-filter="all"
           >
             All
           </button>
 
           {categories &&
-            categories.map((item) => {
-              return (
-                <button
-                  onClick={() => handleCategories(item._id)}
-                  class="btn btn-default filter-button border mx-2"
-                  data-filter="hdpe"
-                >
-                  {item.name}
-                </button>
-              );
-            })}
+            categories.map((item) => (
+              <button
+                key={item._id}
+                onClick={() => handleCategories(item._id)}
+                className={`btn filter-button border mx-2 ${selectedCategoryId === item._id ? "btn-primary" : "btn-default"}`}
+                data-filter="hdpe"
+              >
+                {item.name}
+              </button>
+            ))}
         </div>
 
         <br />
 
-        {images &&
-          images.map((item) => {
-            return (
-              <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe my-4">
-                <img
-                  src={`http://localhost:8000/${item.name}`}
-                  class="img img-responsive"
-                  height="300px"
-                  width="300px"
-                />
-              </div>
-            );
-          })}
+        {filteredImages &&
+          filteredImages.map((item) => (
+            <div
+              key={item._id}
+              className="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe my-4"
+            >
+              <img
+                src={`http://localhost:8000/${item.name}`}
+                className="img img-responsive"
+                height="300px"
+                width="300px"
+                alt={item.name}
+              />
+            </div>
+          ))}
       </div>
     </div>
   );
