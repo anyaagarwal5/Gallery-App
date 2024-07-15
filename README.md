@@ -1,19 +1,19 @@
 # **Gallery App**
-
+A web application built with React, Redux, Express, and MongoDB for managing images and categories.
 
 ---
 
-## Data Collection 
-- Searched for suitable dataset to be trained on my hardware <br>
-- Selected 'Inshorts News Summary Dataset'
-- Successfully loaded the selected dataset , saved that in Data Folder.
+## Features
+-Home Page: Displays all images categorized by user-defined categories.
+-Add Image: Upload images to specific categories.
+-Add Category: Create new categories for organizing images.
+-View Single Image: View images filtered by selected category
 
-## Data Preprocessing 
-- Extracted the required columns from the master dataset. 
-- Applied nlp preprocessing techniques on the extracted dataset.
-- Visualized the data distribution between the input and target column.
-- Saved the preprocessed dataset.
-
+## Technologies Used
+-Frontend: React, Redux, React Router, Axios
+-Backend: Node.js, Express.js, MongoDB, Mongoose
+-Styling: CSS, Bootstrap
+-Other Tools: Redux Toolkit, FormData for image uploads
 ## Model Building 
 
 ### Abstractive Approach 
