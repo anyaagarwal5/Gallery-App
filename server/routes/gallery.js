@@ -29,7 +29,7 @@ rout.post("/add/category", gallcontrol.addNewCategory);
 rout.get("/get/categories", gallcontrol.getAllCategories);
 rout.get("/get/images", gallcontrol.getAllImages);
 rout.get("/get/singleimage", gallcontrol.getsingleImage);
-
+rout.delete('/delete/category/:id', gallcontrol.deleteCategory);
 export default rout;
 
 

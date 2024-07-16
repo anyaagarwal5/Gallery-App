@@ -18,7 +18,7 @@ class gallcontrol {
                 return res.status(400).json({ message: "All fields are required" });
             }
         } catch (error) {
-            return res.status(400).json({ message: error.message });
+            return res.status(500).json({ message: error.message });
         }
     };
 
@@ -37,7 +37,7 @@ class gallcontrol {
                 return res.status(400).json({ message: "All fields are required" });
             }
         } catch (error) {
-            return res.status(400).json({ message: error.message });
+            return res.status(500).json({ message: error.message });
         }
     };
 
@@ -46,7 +46,7 @@ class gallcontrol {
             const fetchall = await catmodel.find({});
             return res.status(200).json(fetchall);
         } catch (error) {
-            return res.status(400).json({ message: error.message });
+            return res.status(500).json({ message: error.message });
         }
     };
 
@@ -55,7 +55,7 @@ class gallcontrol {
             const fetchallimages = await galmodel.find({});
             return res.status(200).json(fetchallimages);
         } catch (error) {
-            return res.status(400).json({ message: error.message });
+            return res.status(500).json({ message: error.message });
         }
     };
 
@@ -63,15 +63,26 @@ class gallcontrol {
         const { category } = req.query;
         try {
             if (category) {
-                const basedimage = await galmodel.find({
-                    category: category,
-                });
+                const basedimage = await galmodel.find({ category: category });
                 return res.status(200).json(basedimage);
             } else {
                 return res.status(400).json({ message: "All fields are required" });
             }
         } catch (error) {
-            return res.status(400).json({ message: error.message });
+            return res.status(500).json({ message: error.message });
+        }
+    };
+
+    static deleteCategory = async (req, res) => {
+        const { id } = req.params;
+        try {
+            const deletedCategory = await catmodel.findByIdAndDelete(id);
+            if (!deletedCategory) {
+                return res.status(404).json({ message: "Category not found" });
+            }
+            return res.status(200).json({ message: "Category deleted successfully" });
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
         }
     };
 }

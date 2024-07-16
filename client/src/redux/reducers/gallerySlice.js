@@ -60,6 +60,13 @@ export const postNewImage = createAsyncThunk(
   }
 );
 
+export const deleteCategory = createAsyncThunk(
+  "images/deleteCategory",
+  async (id) => {
+    const res = await axios.delete(`http://localhost:8000/api/v1/delete/category/${id}`);
+    return res.id;
+  }
+);
 const gallerySlice = createSlice({
   name: "galleryslice",
   initialState: initialValues,
@@ -75,7 +82,10 @@ const gallerySlice = createSlice({
       state.singleImage = action.payload;
     });
     builder.addCase(postNewImage.fulfilled, (state, action) => {
-      state.images.push(action.payload); // Append the new image to the state
+      state.images.push(action.payload);
+    });
+    builder.addCase(deleteCategory.fulfilled, (state, action) => {
+      state.categories = state.categories.filter(category => category._id !== action.payload);
     });
   },
 });
